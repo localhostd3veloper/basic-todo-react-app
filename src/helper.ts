@@ -4,6 +4,7 @@ export type TypeTodo = {
 	uuid: string;
 	text: string;
 	createdOn: Date;
+	state: 'NOT-STARTED' | 'IN-PROGRESS' | 'COMPLETED';
 };
 
 export const genUUID = () => uuidV4().substring(0, 6);
@@ -24,4 +25,11 @@ export const setLocalStorageData = (newData: TypeTodo[]) => {
 		return true;
 	}
 	return false;
+};
+
+export const getFilteredTasks = (
+	state: TypeTodo['state'],
+	todoList: TypeTodo[],
+) => {
+	return todoList.filter((val) => val.state === state);
 };

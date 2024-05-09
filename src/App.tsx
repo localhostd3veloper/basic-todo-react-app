@@ -3,6 +3,7 @@ import './App.scss';
 import {
 	TypeTodo,
 	genUUID,
+	getFilteredTasks,
 	getLocalStorageData,
 	setLocalStorageData,
 } from './helper';
@@ -18,6 +19,7 @@ function App() {
 			uuid: genUUID(),
 			text: todoInputRef.current?.value ?? '',
 			createdOn: new Date(),
+			state: 'NOT-STARTED',
 		};
 		setTodoList((prev) => {
 			setLocalStorageData([...prev, newTodoObj]);
@@ -25,11 +27,16 @@ function App() {
 		});
 	};
 
-	const removeTodo = (uuid: string) => {
+	const modifyTodoState = (uuid: string, state: TypeTodo['state']) => {
 		setTodoList((prev) => {
-			const updatedList = prev.filter((val) => val.uuid !== uuid);
-			setLocalStorageData(updatedList);
-			return updatedList;
+			const todo = prev.find((val) => val.uuid === uuid);
+			if (todo) {
+				const filteredList = prev.filter((val) => val.uuid !== uuid);
+				todo.state = state;
+				setLocalStorageData([...filteredList, todo]);
+				return [...filteredList, todo];
+			}
+			return prev;
 		});
 	};
 
@@ -44,18 +51,43 @@ function App() {
 				/>
 				<button type="submit">Add todo</button>
 			</form>
+			<h1>Not-started</h1>
 			<ul>
-				{todoList.map((todo, i) => (
+				{getFilteredTasks('NOT-STARTED', todoList).map((todo, i) => (
 					<div key={i}>
 						<li>{todo.text}</li>
 						<button
 							type="button"
 							onClick={() => {
-								removeTodo(todo.uuid);
+								modifyTodoState(todo.uuid, 'IN-PROGRESS');
 							}}
 						>
-							Delete
+							MODIFY
 						</button>
+					</div>
+				))}
+			</ul>
+			<h1>IN-PROGRESS</h1>
+			<ul>
+				{getFilteredTasks('IN-PROGRESS', todoList).map((todo, i) => (
+					<div key={i}>
+						<li>{todo.text}</li>
+						<button
+							type="button"
+							onClick={() => {
+								modifyTodoState(todo.uuid, 'COMPLETED');
+							}}
+						>
+							MODIFY
+						</button>
+					</div>
+				))}
+			</ul>
+			<h1>COMPLETED</h1>
+			<ul>
+				{getFilteredTasks('COMPLETED', todoList).map((todo, i) => (
+					<div key={i}>
+						<li>{todo.text}</li>
 					</div>
 				))}
 			</ul>
