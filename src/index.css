@@ -1,0 +1,36 @@
+:root {
+	color-scheme: light dark;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+}
+
+html {
+	font-size: 100%;
+}
+
+:root {
+	/* CSS HEX */
+	--bright-pink-crayola: #f45b69;
+	--cream: #f0f3bd;
+	--paynes-gray: #525b76;
+	--columbia-blue: #bfdbf7;
+	--lavender-web: #e1e5f2;
+
+	/* CSS HSL */
+	--bright-pink-crayola: hsla(355, 87%, 66%, 1);
+	--cream: hsla(63, 69%, 85%, 1);
+	--paynes-gray: hsla(225, 18%, 39%, 1);
+	--columbia-blue: hsla(210, 78%, 86%, 1);
+	--lavender-web: hsla(226, 40%, 92%, 1);
+}
