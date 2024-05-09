@@ -1,7 +1,12 @@
+import { v4 as uuidV4 } from 'uuid';
+
 export type TypeTodo = {
+	uuid: string;
 	text: string;
 	createdOn: Date;
 };
+
+export const genUUID = () => uuidV4().substring(0, 6);
 
 export const getLocalStorageData = () => {
 	if (localStorage) {
