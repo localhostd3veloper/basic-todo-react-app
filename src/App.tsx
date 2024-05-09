@@ -1,9 +1,10 @@
 import { useRef, useState } from 'react';
 import './App.scss';
-import { TypeTodo } from './helper';
+import { TypeTodo, getLocalStorageData, setLocalStorageData } from './helper';
 
 function App() {
-	const [todoList, setTodoList] = useState<TypeTodo[]>([]);
+	const initialLocalStorageData = getLocalStorageData();
+	const [todoList, setTodoList] = useState(initialLocalStorageData);
 	const todoInputRef = useRef<HTMLInputElement>(null);
 
 	const addTodo = (e: React.FormEvent) => {
@@ -12,7 +13,10 @@ function App() {
 			text: todoInputRef.current?.value ?? '',
 			createdOn: new Date(),
 		};
-		setTodoList((prev) => [...prev, newTodoObj]);
+		setTodoList((prev) => {
+			setLocalStorageData([...prev, newTodoObj]);
+			return [...prev, newTodoObj];
+		});
 	};
 
 	return (
