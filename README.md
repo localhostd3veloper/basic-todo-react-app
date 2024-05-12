@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# Tody - The basic react todo App
 
 Download dependencies
 
