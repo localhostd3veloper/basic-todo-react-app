@@ -3,8 +3,7 @@ import { v4 as uuidV4 } from 'uuid';
 export type TypeTodo = {
 	uuid: string;
 	text: string;
-	createdOn: Date;
-	state: 'NOT-STARTED' | 'IN-PROGRESS' | 'COMPLETED';
+	state: 'ACTIVE' | 'DONE';
 };
 
 export const genUUID = () => uuidV4().substring(0, 6);
@@ -27,9 +26,9 @@ export const setLocalStorageData = (newData: TypeTodo[]) => {
 	return false;
 };
 
-export const getFilteredTasks = (
-	state: TypeTodo['state'],
-	todoList: TypeTodo[],
-) => {
-	return todoList.filter((val) => val.state === state);
+export type TypeFilters = 'ALL' | TypeTodo['state'];
+
+export const getFilteredTasks = (todoList: TypeTodo[], filter: TypeFilters) => {
+	if (filter === 'ALL') return todoList;
+	return todoList.filter((val) => val.state === filter);
 };
