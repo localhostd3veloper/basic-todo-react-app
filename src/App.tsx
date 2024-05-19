@@ -66,24 +66,32 @@ function App() {
 	};
 
 	return (
-		<main className="w-full h-full p-8">
-			<section id="heroSection" className="w-full text-center">
+		<main className="w-full h-full p-4 sm:p-6 lg:p-8">
+			<section
+				id="heroSection"
+				className="w-full text-center space-y-4 sm:space-y-6"
+			>
 				<h3 className="text-2xl font-semibold" data-aos="fade-up">
 					Welcome to{' '}
 					<span className="font-power text-red-500">Tody</span> (
 					Tooh-dee )
 				</h3>
-				<h1 id="heroText-1" className="text-9xl space-x-5" data-aos="fade-up">
-					<span className="font-bold font-power" >Achieve</span>
-					<span className="material-symbols-outlined text-5xl bg-red-500 rounded-full text-white p-4">
+				<h1
+					id="heroText-1"
+					className="text-4xl space-x-2 sm:text-6xl lg:space-x-5 lg:text-8xl"
+					data-aos="fade-up"
+				>
+					<span className="font-bold font-power">Achieve</span>
+					<span className="material-symbols-outlined bg-red-500 rounded-full text-white px-2 py-1 text-xl sm:text-3xl lg:p-4 lg:text-5xl">
 						north_east
 					</span>
 					<span>Like</span>
 					<br />
-					<span>Never</span>{' '}
+					<span>Never</span>
+					<span className="hidden sm:inline-block"> </span>
 					<span className="font-bold font-power">Before</span>
 				</h1>
-				<h3 className="text-2xl font-semibold">
+				<h3 className="text-xl font-semibold lg:text-2xl">
 					Use Tody and{' '}
 					<span className="font-power bg-red-500 py-1 px-2 rounded-3xl text-white">
 						Accomplish
@@ -91,7 +99,10 @@ function App() {
 					your goals
 				</h3>
 			</section>
-			<form className="w-1/2 mx-auto my-8 flex" onSubmit={addTodo}>
+			<form
+				className="mx-auto my-8 flex sm:w-10/12 lg:w-3/4 lg:w1/2"
+				onSubmit={addTodo}
+			>
 				<input
 					type="text"
 					name="newTodo"
@@ -110,7 +121,7 @@ function App() {
 					</span>
 				</button>
 			</form>
-			<section className="w-3/4 mt-4 mx-auto">
+			<section className="mt-4 mx-auto sm:w-10/12 lg:w-3/4">
 				<div
 					id="filtersAndSortContainer"
 					className="w-full h-full flex items-center gap-4"
@@ -145,7 +156,7 @@ function App() {
 				</div>
 				<div
 					id="todoList"
-					className="mt-4 w-full flex flex-col gap-4 overflow-y-scroll px-3 h-[43vh]"
+					className="mt-4 w-full flex flex-col gap-4 overflow-y-scroll h-[43vh]"
 				>
 					{getFilteredTasks(todoList, filter).map((todo) => (
 						<div
